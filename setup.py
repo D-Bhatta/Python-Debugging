@@ -7,7 +7,7 @@ requirements = []
 
 setup(
     name="python_debug",
-    version="0.0.1",
+    version="0.0.2",
     author="D-Bhatta",
     author_email="dbhatta1232@gmail.com",
     description="Following the code for the Python Debugging with PDB tutorial on Real Python",
