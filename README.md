@@ -17,4 +17,4 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
 
 ## Notes
 
-- Here be notes
+1. Here be notes
