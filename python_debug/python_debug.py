@@ -20,7 +20,7 @@ def example_1():
     'python_debug.py'
     """
     filename = __file__
-    import pdb; pdb.set_trace()
+    breakpoint()
     print(f'path = {filename}')
 
 example_1()

@@ -10,3 +10,5 @@ script:
 - pytest --cov=python_debug
 after_success:
 - coveralls
+env:
+- PYTHONBREAKPOINT=0
