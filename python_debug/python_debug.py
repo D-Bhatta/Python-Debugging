@@ -45,3 +45,13 @@ def get_path(filename):
 def example_2():
     filename = __file__
     print(f"path  = {get_path(filename)}")
+
+
+def example_3():
+    filename = __file__
+    breakpoint()
+    filename_path = get_path(filename)
+    print(f"path = {filename_path}")
+
+
+example_3()
