@@ -10,5 +10,3 @@ def helloworld(code):
         raise TypeError
 
     print("I am a {}.".format(code))
-
-
