@@ -62,4 +62,27 @@ def example_4():
     print(f"path = {filename_path}")
 
 
-example_4()
+def get_path_fname(fname):
+    """ 
+    Return the path of the file
+    args:
+        fname (str): name of the file
+    returns:
+        head (str): path to the file
+    """
+    breakpoint()
+    if type(fname) != str:
+        raise TypeError
+    head, tail = os.path.split(fname)  # pylint: disable=unused-variable
+    for char in tail:
+        pass
+    return head
+
+
+def example_5():
+    filename = __file__
+    filename_path = get_path_fname(filename)
+    print(f"path = {filename_path}")
+
+
+example_5()
