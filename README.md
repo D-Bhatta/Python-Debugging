@@ -299,4 +299,51 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
         bdb.BdbQuit
         ```
 
-   9.  
+   9. unt
+
+       1. until command
+       2. `unt` **line-number**
+       3. `unt` command moves to a line with a higher number
+       4. if no line number is specified then it moves to the very next greater line, stepping over other lines
+       5. if a line number is specified then it behaves like `s` and moves to the next line with greater value than **line-number**
+
+   10. example_5
+
+        ```python
+        PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py     
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(73)get_path_fname()
+        -> if type(fname) != str:
+        (Pdb) ll
+        64     def get_path_fname(fname):
+        65         """
+        66         Return the path of the file
+        67         args:
+        68             fname (str): name of the file
+        69         returns:
+        70             head (str): path to the file
+        71         """
+        72         breakpoint()
+        73  ->     if type(fname) != str:
+        74             raise TypeError
+        75         head, tail = os.path.split(fname)  # pylint: disable=unused-variable
+        76         for char in tail:
+        77             pass
+        78         return head
+        (Pdb) unt
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(75)get_path_fname()
+        -> head, tail = os.path.split(fname)  # pylint: disable=unused-variable
+        (Pdb) 
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(76)get_path_fname()
+        -> for char in tail:
+        (Pdb) 
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(77)get_path_fname()
+        -> pass
+        (Pdb)
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(78)get_path_fname()
+        -> return head
+        (Pdb) p char, tail
+        ('y', 'python_debug.py')
+        (Pdb) q
+        ```
+
+   11. 

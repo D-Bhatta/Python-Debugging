@@ -46,3 +46,26 @@ def test_example_3(capsys):
     python_debug.example_3()
     captured = capsys.readouterr()
     assert "python_debug" in captured.out
+
+
+def test_example_4(capsys):
+    python_debug.example_4()
+    captured = capsys.readouterr()
+    assert "python_debug" in captured.out
+
+
+def test_example_5(capsys):
+    python_debug.example_3()
+    captured = capsys.readouterr()
+    assert "python_debug" in captured.out
+
+
+def test_get_path_fname():
+    head = python_debug.get_path("test_python_debug.py")
+    assert head == "", "Incorrect path"
+
+
+def test_get_path_fname_exception():
+    """ Check if the function raises correct exception """
+    with pytest.raises(TypeError):
+        python_debug.get_path_fname(1)
