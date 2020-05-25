@@ -1,4 +1,5 @@
 import os
+
 # pylint: disable=anomalous-backslash-in-string
 def helloworld(code):
     """ 
@@ -13,6 +14,7 @@ def helloworld(code):
 
     print("I am a {}.".format(code))
 
+
 def example_1():
     """ 
     output:
@@ -23,7 +25,8 @@ def example_1():
     """
     filename = __file__
     breakpoint()
-    print(f'path = {filename}')
+    print(f"path = {filename}")
+
 
 def get_path(filename):
     """
@@ -33,10 +36,12 @@ def get_path(filename):
     returns:
         head (str): path to the file
     """
+    if type(filename) != str:
+        raise TypeError
     head = os.path.split(filename)[0]
     return head
 
+
 def example_2():
     filename = __file__
-    print(f'path  = {get_path(filename)}')
-
+    print(f"path  = {get_path(filename)}")

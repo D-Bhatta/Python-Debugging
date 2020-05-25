@@ -5,9 +5,9 @@ install:
 - pip install -r requirements_dev.txt
 - pip install -e .
 script:
-- black python_debug/
+- black --check python_debug/
 - pytest
-- pytest --cov=python_debug
+- pytest --cov=python_debug --cov-fail-under=100
 after_success:
 - coveralls
 env:
