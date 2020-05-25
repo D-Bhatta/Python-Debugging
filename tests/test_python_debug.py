@@ -40,3 +40,9 @@ def test_example_2(capsys):
     python_debug.example_2()
     captured = capsys.readouterr()
     assert "python_debug" in captured.out
+
+
+def test_example_3(capsys):
+    python_debug.example_3()
+    captured = capsys.readouterr()
+    assert "python_debug" in captured.out
