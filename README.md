@@ -156,4 +156,8 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
             Also note ->'.' at the end of the line after the first --Return--. When pdb stops at the end of a function before it returns, it also prints the return value for you. In this example it’s '.'.
             ```
 
-   6. 
+   6. List code on pdb
+      1. using `ll` you can long list source code of current function
+      2. using `l` (list) command you can list shorter code
+         1. `l` prints `11` lines by default around the current line until EOF
+         2. passing `.` to `l` like `l .` prints 11 lines or the previous listing
