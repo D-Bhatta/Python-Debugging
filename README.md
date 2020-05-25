@@ -1,3 +1,91 @@
+PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py     
+> j:\education\code\python\python-debugging\python_debug\python_debug.py(61)example_4()
+-> filename_path = util.get_path(filename)
+(Pdb) b util:14
+Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:14
+(Pdb) c
+> j:\education\code\python\python-debugging\python_debug\util.py(14)get_path()
+-> return head
+(Pdb) p filename, head, tail
+('python_debug\\python_debug.py', 'python_debug', 'python_debug.py')
+(Pdb) q
+Traceback (most recent call last):
+  File "python_debug\python_debug.py", line 64, in <module>
+    example_4()
+  File "python_debug\python_debug.py", line 61, in example_4
+    filename_path = util.get_path(filename)
+et_path
+    return head
+  File "J:\Education\Code\Python\Python-Debugging\python_debug\util.py", line 14, in get_path
+    return head
+  File "C:\Program Files\Python37\lib\bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "C:\Program Files\Python37\lib\bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
+
+PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py     
+> j:\education\code\python\python-debugging\python_debug\python_debug.py(61)example_4()
+-> filename_path = util.get_path(filename)
+(Pdb) b util.get_path   
+Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+(Pdb) c
+> j:\education\code\python\python-debugging\python_debug\util.py(11)get_path()
+-> if type(filename) != str:
+(Pdb) p filename
+'python_debug\\python_debug.py'
+(Pdb) b
+Num Type         Disp Enb   Where
+1   breakpoint   keep yes   at j:\education\code\python\python-debugging\python_debug\util.py:3
+        breakpoint already hit 1 time
+(Pdb) disable 1
+Disabled breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+(Pdb) enable 1
+Enabled breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+(Pdb) q
+Traceback (most recent call last):
+  File "python_debug\python_debug.py", line 64, in <module>
+    example_4()
+  File "python_debug\python_debug.py", line 61, in example_4
+    filename_path = util.get_path(filename)
+et_path
+    if type(filename) != str:
+  File "J:\Education\Code\Python\Python-Debugging\python_debug\util.py", line 11, in get_path
+    if type(filename) != str:
+  File "C:\Program Files\Python37\lib\bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "C:\Program Files\Python37\lib\bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
+
+PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py     
+> j:\education\code\python\python-debugging\python_debug\python_debug.py(61)example_4()
+-> filename_path = util.get_path(filename)
+(Pdb) b util.get_path, filename.startswith('p')
+Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+(Pdb) c
+> j:\education\code\python\python-debugging\python_debug\util.py(11)get_path()
+-> if type(filename) != str:
+(Pdb) a
+filename = 'python_debug\\python_debug.py'
+(Pdb) q
+Traceback (most recent call last):
+  File "python_debug\python_debug.py", line 64, in <module>
+    example_4()
+  File "python_debug\python_debug.py", line 61, in example_4
+    filename_path = util.get_path(filename)
+et_path
+    if type(filename) != str:
+  File "J:\Education\Code\Python\Python-Debugging\python_debug\util.py", line 11, in get_path
+    if type(filename) != str:
+  File "C:\Program Files\Python37\lib\bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "C:\Program Files\Python37\lib\bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+
 # Python-Debugging
 
 Contains the code for the Python Debugging with PDB tutorial on [Python Debugging With Pdb](https://realpython.com/python-debugging-pdb/).
@@ -310,7 +398,7 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
    10. example_5
 
         ```python
-        PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py     
+        PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py
         > j:\education\code\python\python-debugging\python_debug\python_debug.py(73)get_path_fname()
         -> if type(fname) != str:
         (Pdb) ll
@@ -332,10 +420,10 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
         (Pdb) unt
         > j:\education\code\python\python-debugging\python_debug\python_debug.py(75)get_path_fname()
         -> head, tail = os.path.split(fname)  # pylint: disable=unused-variable
-        (Pdb) 
+        (Pdb)
         > j:\education\code\python\python-debugging\python_debug\python_debug.py(76)get_path_fname()
         -> for char in tail:
-        (Pdb) 
+        (Pdb)
         > j:\education\code\python\python-debugging\python_debug\python_debug.py(77)get_path_fname()
         -> pass
         (Pdb)
@@ -346,4 +434,105 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
         (Pdb) q
         ```
 
-   11. 
+   11. display expressions
+       1. set display with `display` **expression**
+       2. unset display with `undisplay` **expression**
+       3. display automatically shows the value of an expression if it changes
+
+            ```python
+            PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py
+            > j:\education\code\python\python-debugging\python_debug\python_debug.py(74)get_path_fname()
+            -> if type(fname) != str:
+            (Pdb) ll
+            65     def get_path_fname(fname):
+            66         """
+            67         Return the path of the file
+            68         args:
+            69             fname (str): name of the file
+            70         returns:
+            71             head (str): path to the file
+            72         """
+            73         breakpoint()
+            74  ->     if type(fname) != str:
+            75             raise TypeError
+            76         head, tail = os.path.split(fname)  # pylint: disable=unused-variable
+            77         for char in tail:
+            78             pass
+            79         return head
+            (Pdb) b 78
+            Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\python_debug.py:78
+            (Pdb) c
+            > j:\education\code\python\python-debugging\python_debug\python_debug.py(78)get_path_fname()
+            -> pass
+            (Pdb) display char
+            display char: 'p'
+            (Pdb) c
+            > j:\education\code\python\python-debugging\python_debug\python_debug.py(78)get_path_fname()
+            -> pass
+            display char: 'y'  [old: 'p']
+            (Pdb) c
+            > j:\education\code\python\python-debugging\python_debug\python_debug.py(78)get_path_fname()
+            -> pass
+            display char: 't'  [old: 'y']
+            (Pdb) c
+            > j:\education\code\python\python-debugging\python_debug\python_debug.py(78)get_path_fname()
+            -> pass
+            display char: 'h'  [old: 't']
+            (Pdb) c
+            > j:\education\code\python\python-debugging\python_debug\python_debug.py(78)get_path_fname()
+            -> pass
+            display char: 'o'  [old: 'h']
+            (Pdb) q
+            ```
+
+       4. you can see all expressions with `display`
+
+            ```python
+            PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py
+            > j:\education\code\python\python-debugging\python_debug\python_debug.py(74)get_path_fname()
+            -> if type(fname) != str:
+            (Pdb) ll
+            65     def get_path_fname(fname):
+            66         """
+            67         Return the path of the file
+            68         args:
+            69             fname (str): name of the file
+            70         returns:
+            71             head (str): path to the file
+            72         """
+            73         breakpoint()
+            74  ->     if type(fname) != str:
+            75             raise TypeError
+            76         head, tail = os.path.split(fname)  # pylint: disable=unused-variable
+            77         for char in tail:
+            78             pass
+            79         return head
+            (Pdb) b 78
+            Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\python_debug.py:78
+            (Pdb) c
+            > j:\education\code\python\python-debugging\python_debug\python_debug.py(78)get_path_fname()
+            -> pass
+            (Pdb) display
+            Currently displaying:
+            (Pdb) display char
+            display char: 'p'
+            (Pdb) display fname
+            display fname: 'python_debug\\python_debug.py'
+            (Pdb) display head
+            display head: 'python_debug'
+            (Pdb) display tail
+            display tail: 'python_debug.py'
+            (Pdb) c
+            > j:\education\code\python\python-debugging\python_debug\python_debug.py(78)get_path_fname()
+            -> pass
+            display char: 'y'  [old: 'p']
+            (Pdb) display
+            Currently displaying:
+            char: 'y'
+            fname: 'python_debug\\python_debug.py'
+            head: 'python_debug'
+            tail: 'python_debug.py'
+            (Pdb) q
+            ```
+
+   12. 
