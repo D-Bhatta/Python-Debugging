@@ -161,3 +161,142 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
       2. using `l` (list) command you can list shorter code
          1. `l` prints `11` lines by default around the current line until EOF
          2. passing `.` to `l` like `l .` prints 11 lines or the previous listing
+
+   7. breakpoints
+      1. create breakpoints with `b` command
+         1. `b` **file-name**`:`**line-number** `expression`
+         2. `b` **file-name**`:`**function-name** `expression`
+
+            ```python
+            (Pdb) b util.get_path, filename.startswith('p')
+            (Pdb) b util:14, head.startswith('p')
+            ```
+
+      2. type `c` to continue till breakpoint
+      3. pdb continues program execution *until* breakpoint is reached
+
+            ```python
+            -> filename_path = util.get_path(filename)
+            (Pdb) b util:14
+            Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:14
+            (Pdb) c
+            > j:\education\code\python\python-debugging\python_debug\util.py(14)get_path()
+            -> return head
+            (Pdb)
+            ```
+
+      4. type `b` to print a table of all breakpoints
+
+            ```python
+            (Pdb) b
+            Num Type         Disp Enb   Where
+            1   breakpoint   keep yes   at j:\education\code\python\python-debugging\python_debug\util.py:3
+                    breakpoint already hit 1 time
+            ```
+
+      5. type `enable` **Num** to enable a breakpoint
+
+            ```python
+            (Pdb) b
+            Num Type         Disp Enb   Where
+            1   breakpoint   keep yes   at j:\education\code\python\python-debugging\python_debug\util.py:3
+                    breakpoint already hit 1 time
+            (Pdb) enable 1
+            Enabled breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+            ```
+
+      6. type `disable` **Num** to disable a breakpoint
+
+            ```python
+            (Pdb) b
+            Num Type         Disp Enb   Where
+            1   breakpoint   keep yes   at j:\education\code\python\python-debugging\python_debug\util.py:3
+                    breakpoint already hit 1 time
+            (Pdb) disable 1
+            Disabled breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+            ```
+
+      7. using an expression means the program breaks on a line only when the expression evaluates to true
+   8. example_4
+
+        ```python
+        PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(61)example_4()
+        -> filename_path = util.get_path(filename)
+        (Pdb) b util:14
+        Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:14
+        (Pdb) c
+        > j:\education\code\python\python-debugging\python_debug\util.py(14)get_path()
+        -> return head
+        (Pdb) p filename, head, tail
+        ('python_debug\\python_debug.py', 'python_debug', 'python_debug.py')
+        (Pdb) q
+        ```
+
+        ```python
+        PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(61)example_4()
+        -> filename_path = util.get_path(filename)
+        (Pdb) b util.get_path
+        Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+        (Pdb) c
+        > j:\education\code\python\python-debugging\python_debug\util.py(11)get_path()
+        -> if type(filename) != str:
+        (Pdb) p filename
+        'python_debug\\python_debug.py'
+        (Pdb) b
+        Num Type         Disp Enb   Where
+        1   breakpoint   keep yes   at j:\education\code\python\python-debugging\python_debug\util.py:3
+                breakpoint already hit 1 time
+        (Pdb) disable 1
+        Disabled breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+        (Pdb) enable 1
+        Enabled breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+        (Pdb) q
+        ```
+
+        ```python
+        PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(61)example_4()
+        -> filename_path = util.get_path(filename)
+        (Pdb) b util.get_path, filename.startswith('p')
+        Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:3
+        (Pdb) c
+        > j:\education\code\python\python-debugging\python_debug\util.py(11)get_path()
+        -> if type(filename) != str:
+        (Pdb) a
+        filename = 'python_debug\\python_debug.py'
+        (Pdb) q
+        ```
+
+        ```python
+        PS J:\Education\Code\Python\Python-Debugging> python python_debug\python_debug.py
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(61)example_4()
+        -> filename_path = util.get_path(filename)
+        (Pdb) b util:14, head.startswith('p')
+        Breakpoint 1 at j:\education\code\python\python-debugging\python_debug\util.py:14
+        (Pdb) c
+        > j:\education\code\python\python-debugging\python_debug\util.py(14)get_path()
+        -> return head
+        (Pdb) p head
+        'python_debug'
+        (Pdb) a
+        filename = 'python_debug\\python_debug.py'
+        (Pdb) q
+        Traceback (most recent call last):
+        File "python_debug\python_debug.py", line 64, in <module>
+            example_4()
+        File "python_debug\python_debug.py", line 61, in example_4
+            filename_path = util.get_path(filename)
+        File "J:\Education\Code\Python\Python-Debugging\python_debug\util.py", line 14, in get_path
+            return head
+        File "J:\Education\Code\Python\Python-Debugging\python_debug\util.py", line 14, in get_path
+            return head
+        File "C:\Program Files\Python37\lib\bdb.py", line 88, in trace_dispatch
+            return self.dispatch_line(frame)
+        File "C:\Program Files\Python37\lib\bdb.py", line 113, in dispatch_line
+            if self.quitting: raise BdbQuit
+        bdb.BdbQuit
+        ```
+
+   9.  

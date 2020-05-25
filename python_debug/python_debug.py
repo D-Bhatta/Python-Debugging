@@ -1,4 +1,5 @@
 import os
+from python_debug import util
 
 # pylint: disable=anomalous-backslash-in-string
 def helloworld(code):
@@ -54,4 +55,11 @@ def example_3():
     print(f"path = {filename_path}")
 
 
-example_3()
+def example_4():
+    filename = __file__
+    breakpoint()
+    filename_path = util.get_path(filename)
+    print(f"path = {filename_path}")
+
+
+example_4()
