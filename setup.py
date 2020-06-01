@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
-with open("README.md", "r") as readme_file:
-    readme = readme_file.read()
+# with open("README.md", "r") as readme_file:
+#     readme = readme_file.read()
 
 requirements = []
 
@@ -11,7 +11,7 @@ setup(
     author="D-Bhatta",
     author_email="dbhatta1232@gmail.com",
     description="Following the code for the Python Debugging with PDB tutorial on Real Python",
-    long_description=readme,
+    long_description="Following the code for the Python Debugging with PDB tutorial on Real Python",
     long_description_content_type="text/markdown",
     url="https://github.com/D-Bhatta/Python-Debugging.git",
     packages=find_packages(),
