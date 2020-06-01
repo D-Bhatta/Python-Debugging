@@ -28,7 +28,7 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
       1. `breakpoint()` is **more preferable** since you can `set PYTHONBREAKPOINT=0` and completely disable debugging
    3. `python -m pdb app.py arg1 arg2`
 2. press `q` to quit
-3. example_1()
+3. example_1
    1. output:
 
       ```python
@@ -42,7 +42,7 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
    3. Next is the name of the function. In this example, since we’re not paused inside a function and at module level, we see `<module>()`.
    4. `->` starts the 2nd line and is the current source line where Python is paused. This line hasn’t been executed yet. In this example, this is line 24 in example_1.py, from the `>` line above.
    5. `(Pdb)` is pdb’s prompt. It’s waiting for a command
-4. example_2()
+4. example_2
    1. we can print expressions using the `p` command
       1. `ll` is **longlist** and prints the function source code
 
@@ -475,7 +475,7 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
              ```
 
        2. `d` 2
-    7. example_6():
+    7. example_6
 
      ```python
      > j:\education\code\python\python-debugging\python_debug\fileutil.py(13)get_path()
