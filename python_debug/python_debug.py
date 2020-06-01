@@ -1,5 +1,6 @@
 import os
 from python_debug import util
+from python_debug import fileutil
 
 # pylint: disable=anomalous-backslash-in-string
 def helloworld(code):
@@ -74,7 +75,7 @@ def get_path_fname(fname):
     if type(fname) != str:
         raise TypeError
     head, tail = os.path.split(fname)  # pylint: disable=unused-variable
-    for char in tail:
+    for char in tail:  # pylint: disable=unused-variable
         pass
     return head
 
@@ -85,4 +86,24 @@ def example_5():
     print(f"path = {filename_path}")
 
 
-example_5()
+def get_file_info(full_fname):
+    """ 
+    Return the path of the file
+    args:
+        full_fname (str): name of the file
+    returns:
+        file_path (str): path to the file
+    """
+    if type(full_fname) != str:
+        raise TypeError
+    file_path = fileutil.get_path(full_fname)
+    return file_path
+
+
+def example_6():
+    filename = __file__
+    filename_path = get_file_info(filename)
+    print(f"path = {filename_path}")
+
+
+example_6()

@@ -447,4 +447,57 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
             (Pdb) q
             ```
 
-   12. 
+   12. Use the `w` command to know where you are
+       1. `w` means where
+       2. use up `u` or down `d` to move around the frames
+       3. the most recent frame is at the bottom, start there and read from the bottom up
+       4. A stack trace is just a list of all the frames that Python has created to keep track of function calls. A frame is a data structure Python creates when a function is called and deletes when it returns. The stack is simply an ordered list of frames or function calls at any point in time. The (function call) stack grows and shrinks throughout the life of an application as functions are called and then return. When printed, this ordered list of frames, the stack, is called a stack trace
+       5. Think of the current frame as the current function where pdb has stopped execution. In other words, the current frame is where your application is currently paused and is used as the “frame” of reference for pdb commands like p (print). p and other commands will use the current frame for context when needed. In the case of p, the current frame will be used for looking up and printing variable references. When pdb prints a stack trace, an arrow > indicates the current frame.
+       6. to move multiple frames specify the count variable(default 1):
+          1. `u` 2
+
+                ```python
+                > j:\education\code\python\python-debugging\python_debug\python_debug.py(89)get_file_info()
+                        -> file_path = fileutil.get_path(full_fname)
+                        (Pdb) d
+                        > j:\education\code\python\python-debugging\python_debug\fileutil.py(13)get_path()
+                        -> if type(filename) != str:
+                        (Pdb) u 2
+                        > j:\education\code\python\python-debugging\python_debug\python_debug.py(94)example_6()
+                        -> filename_path = get_file_info(filename)
+                        (Pdb) q
+                ```
+
+          2. `d` 2
+       7. example_6():
+
+        ```python
+        > j:\education\code\python\python-debugging\python_debug\fileutil.py(13)get_path()
+        -> if type(filename) != str:
+        (Pdb) w
+        j:\education\code\python\python-debugging\python_debug\python_debug.py(97)<module>()
+        -> example_6()
+        j:\education\code\python\python-debugging\python_debug\python_debug.py(94)example_6()
+        -> filename_path = get_file_info(filename)
+        j:\education\code\python\python-debugging\python_debug\python_debug.py(89)get_file_info()
+        -> file_path = fileutil.get_path(full_fname)
+        > j:\education\code\python\python-debugging\python_debug\fileutil.py(13)get_path()
+        -> if type(filename) != str:
+        (Pdb) u
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(89)get_file_info()
+        -> file_path = fileutil.get_path(full_fname)
+        (Pdb) d
+        > j:\education\code\python\python-debugging\python_debug\fileutil.py(13)get_path()
+        -> if type(filename) != str:
+        (Pdb) u 2
+        > j:\education\code\python\python-debugging\python_debug\python_debug.py(94)example_6()
+        -> filename_path = get_file_info(filename)
+        (Pdb) q
+        ```
+
+   13. '`h` is the help command
+
+        1. use `h` **command**
+        2. example: `h w`
+
+   14.  
