@@ -25,9 +25,9 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
 1. start debugger with
    1. `import pdb; pdb.set_trace`
    2. `breakpoint()`
-      1. breakpoint is more preferable since you can set PYTHONBREAKPOINT=0 and completely disable debugging
+      1. `breakpoint()` is **more preferable** since you can `set PYTHONBREAKPOINT=0` and completely disable debugging
    3. `python -m pdb app.py arg1 arg2`
-2. press q to quit
+2. press `q` to quit
 3. example_1()
    1. output:
 
@@ -40,11 +40,11 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
 
    2. `>` starts the 1st line and tells you which source file you’re in. After the filename, there is the current line number in parentheses.
    3. Next is the name of the function. In this example, since we’re not paused inside a function and at module level, we see `<module>()`.
-   4. -> starts the 2nd line and is the current source line where Python is paused. This line hasn’t been executed yet. In this example, this is line 24 in example_1.py, from the > line above.
-   5. (Pdb) is pdb’s prompt. It’s waiting for a command
+   4. `->` starts the 2nd line and is the current source line where Python is paused. This line hasn’t been executed yet. In this example, this is line 24 in example_1.py, from the `>` line above.
+   5. `(Pdb)` is pdb’s prompt. It’s waiting for a command
 4. example_2()
-   1. we can print expressions using the p command as well
-      1. ll is longlist and prints the function source code
+   1. we can print expressions using the `p` command
+      1. `ll` is **longlist** and prints the function source code
 
           ```python
           (Pdb) ll
@@ -61,20 +61,20 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
               38  ->     return head
               ```
 
-      2. print multiple expressions using ,
+      2. print multiple expressions using `,`
 
          ```python
          (Pdb) p head, tail
          ('', 'python_debug.py')```
 
-      3. concatenate strings and expressions using +
+      3. concatenate strings and expressions using `+`
 
          ```python
          (Pdb) p 'filename' + filename
          'filenamepython_debug.py'
          ```
 
-      4. use get_attr to view attributes such as `__doc__`
+      4. use `get_attr` to view attributes such as `__doc__`
 
            ```python
            (Pdb) p getattr(get_path, '__doc__')
@@ -88,7 +88,7 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
          ['python_debug', 'python38.zip', 'DLLs', 'lib', 'Python38', 'site-packages']
          ```
 
-   2. the pp command can be used to preety print expressions
+   2. the `pp` command can be used to pretty print expressions
 
 5. example_3
    1. output:
@@ -130,15 +130,15 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
          -> print(f'path = {filename_path}')
          ```
 
-   2. n command
-      1. next
-      2. n command is used to stepover in local functions,
+   2. `n` command
+      1. **next**
+      2. `n` command is used to stepover in local functions,
       3. wont' move into other function calls
       4. remains in the same function
       5. Continue execution until the next line in the current function is reached or it returns.
 
-   3. s command
-      1. step
+   3. `s` command
+      1. **step**
       2. steps into foreign function from local function
       3. Execute the current line and stop at the first possible occasion (either in a function that is called or in the current function).
    4. Notes
@@ -305,7 +305,7 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
      bdb.BdbQuit
      ```
 
-9. unt
+9. `unt`
 
     1. until command
     2. `unt` **line-number**
@@ -456,7 +456,7 @@ Contains the code for the Python Debugging with PDB tutorial on [Python Debuggin
 12. Use the `w` command to know where you are
     1. `w` means where
     2. use up `u` or down `d` to move around the frames
-    3. the most recent frame is at the bottom, start there and read from the bottom up
+    3. **the most recent frame is at the bottom, start there and read from the bottom up**
     4. A stack trace is just a list of all the frames that Python has created to keep track of function calls. A frame is a data structure Python creates when a function is called and deletes when it returns. The stack is simply an ordered list of frames or function calls at any point in time. The (function call) stack grows and shrinks throughout the life of an application as functions are called and then return. When printed, this ordered list of frames, the stack, is called a stack trace
     5. Think of the current frame as the current function where pdb has stopped execution. In other words, the current frame is where your application is currently paused and is used as the “frame” of reference for pdb commands like p (print). p and other commands will use the current frame for context when needed. In the case of p, the current frame will be used for looking up and printing variable references. When pdb prints a stack trace, an arrow > indicates the current frame.
     6. to move multiple frames specify the count variable(default 1):
